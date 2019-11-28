@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load mptt_tags %}
+
+{% block title %} {{node.name}} {% endblock %}
+
+{% block content %}  
+
+	<div class="row">
+		<div class="col-md-5">
+			<h1>Рубрика: {{node.name}}</h1>
+		</div>
+		<div class="col-md-7">
+			<a class="btn btn-default" href="{% url 'articles:genre_edit' genre_id=node.id %}"><span class="glyphicon glyphicon-pencil"></span></a>
+		</div>
+	</div>
+    
+    {% if node.parent %}
+        <p> Входит в рубрику: <a href="{% url 'articles:genre_detail' node.parent.id %}">{{node.parent}}</a></p>
+    {% else %}
+        <p> Не входит в какие либо рубрики</p>
+    {% endif %}
+	<p>Вернуться в <a href="{% url 'articles:show_genres'%}">рубрики</a></p>
+    {% if articles %}
+    	<h4>Новости данной рубрики:</h4>	
+		<ul>
+			{% for a in articles %}
+
+				<li><h4><a href="{% url 'articles:detail' a.id %}">{{a.article_title}}</a></h4></li>
+
+			{% endfor%}
+		</ul>
+	{% else %}
+		<h2>В данной рубрике новостей нет -_-</h2>
+	{%endif%}
+{% endblock %}

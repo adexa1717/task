@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load mptt_tags %}
+
+{% block title %} Список новостей {% endblock %}
+
+{% block content %}  
+	{% if articles_list %}
+		<form action="{% url 'articles:index' %}">
+		    <input type="search" placeholder="Поиск по названию" name="search">
+		    <button class="btn" type="submit">Поиск</button>
+		</form>
+		{% for a in articles_list %}
+
+			<h4><a href="{% url 'articles:detail' a.id %}">{{a.article_title}}</a></h4></br>
+
+		{% endfor%}
+
+	{% else %}
+		<h2>Новостей нет -_-</h2>
+	{%endif%}
+{% endblock %}

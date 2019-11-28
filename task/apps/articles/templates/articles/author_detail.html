@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{author.author_name}} {% endblock %}
+
+{% block content %}  
+
+	<div class="row">
+		<div class="col-md-5">
+			<h2>{{author.author_name}}</h2>
+		</div>
+		<div class="col-md-7">
+			<a class="btn btn-default" href="{% url 'articles:author_edit' author_id=author.id %}"><span class="glyphicon glyphicon-pencil"></span></a>
+		</div>
+	</div>
+	
+	{% if author.avatar %}
+   		<img src="{{MEDIA_URL}}{{author.avatar.url}}">
+    {% else %}
+    	<p>Аватар отсутствует ):</p>
+    {% endif %}
+    <p>Все <a href="{% url 'articles:authors'%}">авторы</a></p>
+
+    {% if articles %}
+    	<h4>Новости данной рубрики:</h4>	
+		<ul>
+			{% for a in articles %}
+
+				<li><h4><a href="{% url 'articles:detail' a.id %}">{{a.article_title}}</a></h4></li>
+
+			{% endfor%}
+		</ul>
+	{% else %}
+		<h2>Этот автор не выкладывал новостей -_-</h2>
+	{%endif%}
+{% endblock %}

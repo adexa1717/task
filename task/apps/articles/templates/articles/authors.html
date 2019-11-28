@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load mptt_tags %}
+
+{% block title %} Список авторов {% endblock %}
+
+{% block content %}  
+	{% if authors_list %}
+
+		{% for a in authors_list %}
+
+			<h4><a href="{% url 'articles:author_detail' a.id %}">{{a.author_name}}</a></h4></br>
+
+		{% endfor%}
+
+	{% else %}
+		<h2>Авторы осутствуют</h2>
+	{%endif%}
+{% endblock %}

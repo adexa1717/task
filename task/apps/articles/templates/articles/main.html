@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Главная страница {% endblock %}
+
+{% block content %}  
+	<div class="row">
+		<div class="col-md-4">
+			<h1><a href="{% url 'articles:index' %}">Новости</a></h1>
+		</div>
+		<div class="col-md-8">
+			<a href="{% url 'articles:article_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+		</div>
+	</div>
+	<hr/>
+	<div class="row">
+		<div class="col-md-4">
+			<h1><a href="{% url 'articles:show_genres' %}">Рубрики</a></h1>
+		</div>
+		<div class="col-md-8">
+			<a href="{% url 'articles:genre_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+		</div>
+	</div>
+	<hr/>	
+	<div class="row">
+		<div class="col-md-4">
+			<h1><a href="{% url 'articles:authors' %}">Авторы</a></h1>
+		</div>
+		<div class="col-md-8">
+			<a href="{% url 'articles:author_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+		</div>
+	</div>
+{% endblock %}

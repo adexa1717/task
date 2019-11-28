@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load mptt_tags %}
+
+{% block title %} Список рубрик {% endblock %}
+
+{% block content %}  
+    <form action="{% url 'articles:show_genres' %}">
+        <input type="search" placeholder="Поиск рубрики" name="search">
+        <button class="btn" type="submit">Поиск</button>
+    </form>
+    {% if genres %}
+    <ul>
+        {% recursetree genres %}
+            <li>
+                <a href="{% url 'articles:genre_detail' node.id %}">{{ node.name }}
+                {% if not node.is_leaf_node %}
+                    <ul class="children">
+                        {{ children }}
+                    </ul>
+                {% endif %}
+                </a>
+            </li>
+        {% endrecursetree %}
+    </ul>
+    {% else %}
+        <h2>Рубрик нет -_-</h2>
+    {%endif%}
+{% endblock %}

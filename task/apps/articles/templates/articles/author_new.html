@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load mptt_tags %}
+
+{% block title %} Добавить автора {% endblock %}
+
+{% block content %}  
+
+    <form method="POST" class="post-form">
+    	{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Добавить</button>
+    </form>
+{% endblock %}
